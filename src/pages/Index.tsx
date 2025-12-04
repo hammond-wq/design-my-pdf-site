@@ -1,13 +1,34 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Helmet } from "react-helmet-async";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import StudioSpecs from "@/components/StudioSpecs";
+import Packages from "@/components/Packages";
+import Services from "@/components/Services";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      <Helmet>
+        <title>Sunday Studio - Largest Infinity Wall in Lahore | Films, Ads & Fashion</title>
+        <meta 
+          name="description" 
+          content="Sunday Studio offers the largest infinity wall in Lahore. Perfect for films, advertisements & fashion shoots. 105 ft seamless wall, professional lighting & equipment." 
+        />
+        <meta name="keywords" content="infinity wall, Lahore studio, film production, fashion shoots, advertising studio, professional photography studio" />
+      </Helmet>
+      
+      <Navbar />
+      <main>
+        <Hero />
+        <StudioSpecs />
+        <Packages />
+        <Services />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   );
 };
 

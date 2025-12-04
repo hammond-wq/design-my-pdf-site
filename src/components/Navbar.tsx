@@ -1,0 +1,103 @@
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+
+const navLinks = [
+  { name: "Studio", href: "#studio" },
+  { name: "Packages", href: "#packages" },
+  { name: "Services", href: "#services" },
+  { name: "Contact", href: "#contact" },
+];
+
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-background/95 backdrop-blur-md shadow-soft"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container px-6">
+        <div className="flex items-center justify-between h-20">
+          <a href="#" className="flex-shrink-0">
+            <span className="font-display text-2xl text-foreground">Sunday</span>
+            <span className="font-body text-xs tracking-[0.2em] uppercase text-foreground/70 ml-2">Studio</span>
+          </a>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="font-body text-sm tracking-wider uppercase text-foreground/80 hover:text-foreground transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+            <a
+              href="tel:+923000846656"
+              className="ml-4 px-6 py-2.5 bg-primary text-primary-foreground font-body text-sm tracking-wider uppercase hover:opacity-90 transition-opacity"
+            >
+              Call Now
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-foreground"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation */}
+      {isMobileMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="md:hidden bg-background border-t border-border"
+        >
+          <div className="container px-6 py-6 space-y-4">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block font-body text-sm tracking-wider uppercase text-foreground/80 hover:text-foreground py-2"
+              >
+                {link.name}
+              </a>
+            ))}
+            <a
+              href="tel:+923000846656"
+              className="block text-center px-6 py-3 bg-primary text-primary-foreground font-body text-sm tracking-wider uppercase mt-4"
+            >
+              Call Now
+            </a>
+          </div>
+        </motion.div>
+      )}
+    </motion.nav>
+  );
+};
+
+export default Navbar;
