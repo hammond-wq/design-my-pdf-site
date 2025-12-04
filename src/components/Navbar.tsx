@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { name: "Studio", href: "#studio" },
+  { name: "Gallery", href: "#gallery" },
   { name: "Packages", href: "#packages" },
   { name: "Services", href: "#services" },
   { name: "Contact", href: "#contact" },
@@ -42,13 +43,16 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <motion.a
                 key={link.name}
                 href={link.href}
-                className="font-body text-sm tracking-wider uppercase text-foreground/80 hover:text-foreground transition-colors"
+                className="relative font-body text-sm tracking-wider uppercase text-foreground/80 hover:text-foreground transition-colors group"
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 400 }}
               >
                 {link.name}
-              </a>
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              </motion.a>
             ))}
             <a
               href="tel:+923000846656"

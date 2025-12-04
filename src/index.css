@@ -159,6 +159,19 @@
     box-shadow: var(--shadow-elevated);
   }
 
+  /* 3D Transform utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
   .animate-fade-up {
     animation: fadeUp 0.8s ease-out forwards;
   }
